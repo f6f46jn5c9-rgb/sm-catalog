@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Каталог сервисов — Силовые машины</title>
+<style>
+  :root {
+    --pm-navy-dark: #1a2a5e;
+    --pm-navy-blue: #2b4fa8;
+    --pm-teal: #0e7c7b;
+    --pm-teal-dark: #0a5f5e;
+    --pm-red-accent: #e63329;
+    --pm-text-dark: #1a1a2e;
+    --pm-bg-light: #f5f5f5;
+    --pm-white: #ffffff;
+    --pm-muted: #6b7280;
+    --pm-border: #e7e9f0;
+    --radius: 14px;
+    --shadow-sm: 0 2px 10px rgba(26,42,94,.07);
+    --shadow-md: 0 10px 28px rgba(26,42,94,.14);
+    --transition: .25s ease;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "TT Firs Neue", "Inter", "Arial Narrow", Arial, sans-serif;
+    background: var(--pm-bg-light);
+    color: var(--pm-text-dark);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  .container { max-width: 1220px; margin: 0 auto; padding: 0 24px; }
+  svg { display: block; }
+
+  /* ---------- Header ---------- */
+  .site-header {
+    position: relative;
+    background: linear-gradient(135deg, var(--pm-navy-dark) 0%, var(--pm-navy-blue) 100%);
+    color: #fff;
+    padding: 52px 0 76px;
+    overflow: hidden;
+  }
+  .site-header::after {
+    content: "";
+    position: absolute;
+    right: -10%;
+    top: -30%;
+    width: 60%;
+    height: 220%;
+    background: rgba(14,124,123,.18);
+    transform: rotate(18deg);
+    pointer-events: none;
+  }
+  .site-header .header-inner { position: relative; z-index: 1; }
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-size: 14px;
+    opacity: .9;
+    margin-bottom: 28px;
+  }
+  .logo::before {
+    content: "";
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+    background: var(--pm-teal);
+    display: inline-block;
+  }
+  .site-header h1 {
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: 800;
+    letter-spacing: .01em;
+    margin: 0 0 14px;
+  }
+  .site-header .subtitle {
+    font-size: 18px;
+    max-width: 560px;
+    margin: 0 0 22px;
+    opacity: .88;
+  }
+  .header-stats {
+    font-size: 14.5px;
+    opacity: .9;
+  }
+  .header-stats b {
+    color: var(--pm-red-accent);
+    background: #fff;
+    padding: 1px 8px;
+    border-radius: 6px;
+    font-weight: 800;
+    margin-right: 6px;
+  }
+
+  /* ---------- Section labels ---------- */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 22px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    margin: 0 0 24px;
+    color: var(--pm-text-dark);
+  }
+  .section-label::before {
+    content: "";
+    width: 6px;
+    height: 26px;
+    border-radius: 3px;
+    background: var(--pm-teal);
+    display: inline-block;
+    flex: 0 0 auto;
+  }
+
+  /* ---------- Quick access ---------- */
+  .quick-access { background: var(--pm-white); padding: 52px 0 44px; }
+  .quick-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  @media (min-width: 1180px) {
+    .quick-grid { grid-template-columns: repeat(10, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .quick-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .quick-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    padding: 20px 10px;
+    background: var(--pm-white);
+    border: 1.5px solid var(--pm-border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--pm-text-dark);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  }
+  .quick-tile:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--pm-teal);
+  }
+  .quick-tile-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(14,124,123,.1);
+    color: var(--pm-teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition), color var(--transition);
+  }
+  .quick-tile:hover .quick-tile-icon { background: var(--pm-teal); color: #fff; }
+  .quick-tile-icon svg { width: 22px; height: 22px; }
+  .quick-tile-label { font-size: 13.5px; font-weight: 700; }
+
+  /* ---------- Role cards ---------- */
+  .roles { background: var(--pm-bg-light); padding: 48px 0 56px; }
+  .role-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 900px) { .role-cards { grid-template-columns: 1fr; } }
+  .role-card {
+    display: block;
+    background: var(--pm-white);
+    border-radius: 18px;
+    padding: 32px 28px;
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
+    border: 1.5px solid transparent;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  }
+  .role-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--pm-teal);
+  }
+  .role-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--pm-navy-dark), var(--pm-teal));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+  .role-icon svg { width: 28px; height: 28px; }
+  .role-card h3 { margin: 0 0 8px; font-size: 20px; font-weight: 800; }
+  .role-card p { margin: 0; color: var(--pm-muted); font-size: 14.5px; }
+
+  /* ---------- Catalog / accordion ---------- */
+  .catalog { background: var(--pm-white); padding: 56px 0 84px; }
+  .search-wrap { position: relative; max-width: 540px; margin: 0 0 36px; }
+  .search-icon {
+    position: absolute;
+    left: 17px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: var(--pm-muted);
+    pointer-events: none;
+  }
+  #searchInput {
+    width: 100%;
+    padding: 14px 20px 14px 48px;
+    border-radius: 999px;
+    border: 1.5px solid var(--pm-border);
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--pm-text-dark);
+    background: var(--pm-bg-light);
+    transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+  }
+  #searchInput:focus {
+    outline: none;
+    border-color: var(--pm-teal);
+    background: var(--pm-white);
+    box-shadow: 0 0 0 4px rgba(14,124,123,.12);
+  }
+
+  .no-results {
+    display: none;
+    padding: 36px;
+    text-align: center;
+    color: var(--pm-muted);
+    font-size: 15px;
+    background: var(--pm-bg-light);
+    border-radius: var(--radius);
+    margin-bottom: 14px;
+  }
+  .no-results.visible { display: block; }
+
+  .accordion-item {
+    background: var(--pm-white);
+    border: 1.5px solid var(--pm-border);
+    border-radius: var(--radius);
+    margin-bottom: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: border-color var(--transition), display 0s;
+  }
+  .accordion-item.no-match { display: none; }
+
+  .accordion-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    padding: 20px 24px;
+    font-family: inherit;
+    font-size: 16.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    color: var(--pm-text-dark);
+    text-align: left;
+  }
+  .accordion-header:hover { color: var(--pm-teal); }
+  .accordion-header .chevron {
+    flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
+    color: var(--pm-teal);
+    transition: transform var(--transition);
+  }
+  .accordion-header[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+
+  .accordion-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .35s ease;
+  }
+  .accordion-panel-inner {
+    padding: 4px 24px 28px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 32px;
+  }
+  @media (max-width: 760px) {
+    .accordion-panel-inner { grid-template-columns: 1fr; }
+  }
+
+  .subgroup.no-match { display: none; }
+  .subgroup h4 {
+    margin: 0 0 10px;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--pm-teal);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+  .subgroup ul { list-style: none; margin: 0; padding: 0; }
+  .subgroup li.no-match { display: none; }
+  .service-link {
+    display: block;
+    padding: 8px 10px;
+    margin: 0 -10px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--pm-text-dark);
+    font-size: 14.5px;
+    transition: background var(--transition), color var(--transition);
+  }
+  .service-link:hover { background: rgba(14,124,123,.09); color: var(--pm-teal-dark); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--pm-navy-dark);
+    color: rgba(255,255,255,.75);
+    padding: 32px 0;
+    font-size: 13.5px;
+    text-align: center;
+  }
+  footer strong { color: #fff; }
+
+  /* ---------- FAB ---------- */
+  .fab {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--pm-teal);
+    color: #fff;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity var(--transition), transform var(--transition), background var(--transition), visibility var(--transition);
+    z-index: 50;
+  }
+  .fab.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+  .fab:hover { background: var(--pm-teal-dark); }
+  .fab svg { width: 24px; height: 24px; }
+
+  /* ---------- Tooltip ---------- */
+  .tooltip {
+    position: fixed;
+    background: var(--pm-text-dark);
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .18s ease, transform .18s ease;
+    z-index: 100;
+    white-space: nowrap;
+  }
+  .tooltip.show { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- Icon sprite -->
+<svg style="display:none" aria-hidden="true">
+  <symbol id="icon-cert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="icon-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><circle cx="17" cy="14" r="1"/></symbol>
+  <symbol id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></symbol>
+  <symbol id="icon-find-person" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="3"/><path d="M4 20c0-3.3 2.7-6 6-6"/><circle cx="17" cy="17" r="3.4"/><path d="M19.7 19.7L22 22"/></symbol>
+  <symbol id="icon-it" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/><path d="M9 9.2L7.5 10.7 9 12.2M15 9.2l1.5 1.5-1.5 1.5"/></symbol>
+  <symbol id="icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="icon-sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l4-1 11-11-3-3L4 17z"/><path d="M14.5 5.5l3 3"/></symbol>
+  <symbol id="icon-approve" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></symbol>
+  <symbol id="icon-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/><path d="M22 9v6"/></symbol>
+  <symbol id="icon-suitcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></symbol>
+  <symbol id="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></symbol>
+  <symbol id="icon-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M11 20V4M18 20v-7"/><path d="M2 20h20"/></symbol>
+  <symbol id="icon-helmet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15a8 8 0 0 1 16 0"/><path d="M2 15h20v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/><path d="M12 4v3"/></symbol>
+  <symbol id="icon-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol>
+  <symbol id="icon-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></symbol>
+</svg>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="logo">Силовые машины</div>
+    <h1>Каталог сервисов</h1>
+    <p class="subtitle">Всё, что нужно сотруднику, в одном месте</p>
+    <div class="header-stats"><b>146+</b>сервисов и разделов собраны в едином каталоге интранет-портала</div>
+  </div>
+</header>
+
+<section class="quick-access">
+  <div class="container">
+    <h2 class="section-label">Быстрый доступ</h2>
+    <div class="quick-grid">
+      <a class="quick-tile" href="#"><span class="quick-tile-icon"><svg><use href="#icon-cert"/></svg></span><span class="quick-tile-label">Заказать справку</span></a>
+      <a class="quick-tile" href="#"><span class="quick-tile-icon"><svg><use href="#icon-wallet"/></svg></span><span class="quick-tile-label">Зарплата и выплаты</span></a>
+      <a class="quick-tile" href="#"><span class="quick-tile-icon"><svg><use href="#icon-sun"/></svg></span><span class="quick-tile-label">Оформить отпуск</span></a>
+      <a class="quick-tile" href="#"><span class="quick-tile-icon"><svg><use href="#icon-find-person"/></svg></span><span class="quick-tile-label">Найти сотрудника</span></a>
+      <a class="quick-tile" href="#"><span class="quick-tile-icon"><svg><use href="#icon-it"/></svg></span><span class="quick-tile-label">Заявка в ИТ</span></a>
+      <a class="quick-tile" href="#"><span class="quick-tile-icon"><svg><use href="#icon-calendar"/></svg></span><span class="quick-tile-label">Забронировать переговорную</span></a>
+      <a class="quick-tile" href="#"><span class="quick-tile-icon"><svg><use href="#icon-sign"/></svg></span><span class="quick-tile-label">Подписать документ</span></a>
+      <a class="quick-tile" href="#"><span class="quick-tile-icon"><svg><use href="#icon-approve"/></svg></span><span class="quick-tile-label">Согласовать документ</span></a>
+      <a class="quick-tile" href="#"><span class="quick-tile-icon"><svg><use href="#icon-cap"/></svg></span><span class="quick-tile-label">Обучение</span></a>
+      <a class="quick-tile" href="#"><span class="quick-tile-icon"><svg><use href="#icon-suitcase"/></svg></span><span class="quick-tile-label">Оформить командировку</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="roles">
+  <div class="container">
+    <h2 class="section-label">Выберите свою роль</h2>
+    <div class="role-cards">
+      <a class="role-card" href="#">
+        <span class="role-icon"><svg><use href="#icon-star"/></svg></span>
+        <h3>Я новый сотрудник</h3>
+        <p>Первые шаги в компании: адаптация, документы, оформление доступов и всё, что нужно знать в первые недели работы.</p>
+      </a>
+      <a class="role-card" href="#">
+        <span class="role-icon"><svg><use href="#icon-chart"/></svg></span>
+        <h3>Я руководитель</h3>
+        <p>Согласование документов, управление командой, отчётность и инструменты для принятия решений.</p>
+      </a>
+      <a class="role-card" href="#">
+        <span class="role-icon"><svg><use href="#icon-helmet"/></svg></span>
+        <h3>Я работник цеха</h3>
+        <p>Охрана труда, СИЗ, производственные системы и сервисы, важные на рабочем месте в цехе.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="catalog">
+  <div class="container">
+    <h2 class="section-label">Разделы каталога</h2>
+
+    <div class="search-wrap">
+      <svg class="search-icon"><use href="#icon-search"/></svg>
+      <input type="text" id="searchInput" placeholder="Поиск по каталогу сервисов…" autocomplete="off">
+    </div>
+
+    <div class="no-results" id="noResults">Ничего не найдено. Попробуйте другой запрос.</div>
+
+    <div class="accordion" id="accordion">
+
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false" aria-controls="panel-2">
+          <span>2. Кадры, выплаты и документы</span>
+          <svg class="chevron"><use href="#icon-chevron"/></svg>
+        </button>
+        <div class="accordion-panel" id="panel-2">
+          <div class="accordion-panel-inner">
+            <div class="subgroup">
+              <h4>Личное дело и документы</h4>
+              <ul>
+                <li><a class="service-link" href="#">Мой личный кабинет</a></li>
+                <li><a class="service-link" href="#">Подписать кадровый документ (КЭДО)</a></li>
+                <li><a class="service-link" href="#">Электронная трудовая книжка</a></li>
+                <li><a class="service-link" href="#">Заказать справку</a></li>
+                <li><a class="service-link" href="#">Мой HR-бизнес-партнёр</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Отпуск, переводы, увольнение</h4>
+              <ul>
+                <li><a class="service-link" href="#">Оформить отпуск</a></li>
+                <li><a class="service-link" href="#">Перевод на другую работу</a></li>
+                <li><a class="service-link" href="#">Дистанционная работа</a></li>
+                <li><a class="service-link" href="#">Увольнение</a></li>
+                <li><a class="service-link" href="#">Исполнение дополнительных обязанностей</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Выплаты и льготы</h4>
+              <ul>
+                <li><a class="service-link" href="#">Зарплата и выплаты</a></li>
+                <li><a class="service-link" href="#">Как устроена оплата труда</a></li>
+                <li><a class="service-link" href="#">Жилищная программа</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Обязательные процедуры</h4>
+              <ul>
+                <li><a class="service-link" href="#">Пенсия и СНИЛС</a></li>
+                <li><a class="service-link" href="#">Воинский учёт</a></li>
+                <li><a class="service-link" href="#">Допуск к гостайне</a></li>
+                <li><a class="service-link" href="#">Табельный учёт</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Правила и трудовые отношения</h4>
+              <ul>
+                <li><a class="service-link" href="#">Дисциплина и ПВТР</a></li>
+                <li><a class="service-link" href="#">Трудовые отношения</a></li>
+                <li><a class="service-link" href="#">Договор ГПХ</a></li>
+                <li><a class="service-link" href="#">Нормативные документы по кадрам</a></li>
+                <li><a class="service-link" href="#">Профсоюз</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Командировки и приём гостей</h4>
+              <ul>
+                <li><a class="service-link" href="#">Оформить командировку</a></li>
+                <li><a class="service-link" href="#">Гостиницы и авиа: тревел-агент</a></li>
+                <li><a class="service-link" href="#">Деловая виза и загранпаспорт</a></li>
+                <li><a class="service-link" href="#">Московский офис</a></li>
+                <li><a class="service-link" href="#">Приём делегаций</a></li>
+                <li><a class="service-link" href="#">Приглашения и миграционный учёт</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false" aria-controls="panel-3">
+          <span>3. Рабочие инструменты и системы</span>
+          <svg class="chevron"><use href="#icon-chevron"/></svg>
+        </button>
+        <div class="accordion-panel" id="panel-3">
+          <div class="accordion-panel-inner">
+            <div class="subgroup">
+              <h4>Связь и коммуникации</h4>
+              <ul>
+                <li><a class="service-link" href="#">Почта Outlook</a></li>
+                <li><a class="service-link" href="#">Synapse</a></li>
+                <li><a class="service-link" href="#">Видеоконференции</a></li>
+                <li><a class="service-link" href="#">Телефонный справочник</a></li>
+                <li><a class="service-link" href="#">Услуги связи</a></li>
+                <li><a class="service-link" href="#">Забронировать переговорную</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Документы и формы</h4>
+              <ul>
+                <li><a class="service-link" href="#">Согласование документов (СЭД)</a></li>
+                <li><a class="service-link" href="#">Все формы и заявки</a></li>
+                <li><a class="service-link" href="#">Шаблоны документов</a></li>
+                <li><a class="service-link" href="#">Шаблоны презентаций</a></li>
+                <li><a class="service-link" href="#">Фотобанк</a></li>
+                <li><a class="service-link" href="#">Фирменный стиль и логотип</a></li>
+                <li><a class="service-link" href="#">Стенды/постеры/буклеты/сувениры</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Данные и отчётность</h4>
+              <ul>
+                <li><a class="service-link" href="#">Отчётность Power BI</a></li>
+                <li><a class="service-link" href="#">SAP (ERP/BW/HCM)</a></li>
+                <li><a class="service-link" href="#">Управление лимитами</a></li>
+                <li><a class="service-link" href="#">Торговые электронные площадки</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Доступы и техника</h4>
+              <ul>
+                <li><a class="service-link" href="#">Каталог ИТ-услуг и прайс-лист</a></li>
+                <li><a class="service-link" href="#">Дашборд по технике</a></li>
+                <li><a class="service-link" href="#">СКИФ</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false" aria-controls="panel-4">
+          <span>4. Помощь, обращения и идеи</span>
+          <svg class="chevron"><use href="#icon-chevron"/></svg>
+        </button>
+        <div class="accordion-panel" id="panel-4">
+          <div class="accordion-panel-inner">
+            <div class="subgroup">
+              <h4>ИТ-поддержка</h4>
+              <ul>
+                <li><a class="service-link" href="#">Заявка в ИТ (Service Desk)</a></li>
+                <li><a class="service-link" href="#">Каталог ИТ-услуг</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Рабочее место и здание</h4>
+              <ul>
+                <li><a class="service-link" href="#">Заявка в АХО и ремонт помещений</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Пропуск и безопасность</h4>
+              <ul>
+                <li><a class="service-link" href="#">Пропуск (получить/восстановить)</a></li>
+                <li><a class="service-link" href="#">Телефоны экстренных служб</a></li>
+                <li><a class="service-link" href="#">Действия в ЧС</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Обращения и обратная связь</h4>
+              <ul>
+                <li><a class="service-link" href="#">Задать вопрос руководителю</a></li>
+                <li><a class="service-link" href="#">Единое окно обращений</a></li>
+                <li><a class="service-link" href="#">Комитет по этике</a></li>
+                <li><a class="service-link" href="#">Противодействие коррупции</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Идеи и улучшения</h4>
+              <ul>
+                <li><a class="service-link" href="#">Предложить улучшение</a></li>
+                <li><a class="service-link" href="#">Сказать спасибо</a></li>
+                <li><a class="service-link" href="#">Опросы и исследования</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false" aria-controls="panel-5">
+          <span>5. Обучение и развитие</span>
+          <svg class="chevron"><use href="#icon-chevron"/></svg>
+        </button>
+        <div class="accordion-panel" id="panel-5">
+          <div class="accordion-panel-inner">
+            <div class="subgroup">
+              <h4>Учебные платформы</h4>
+              <ul>
+                <li><a class="service-link" href="#">ЭнергоАкадемия (курсы и тесты)</a></li>
+                <li><a class="service-link" href="#">Обучение и развитие</a></li>
+                <li><a class="service-link" href="#">Записи вебинаров</a></li>
+                <li><a class="service-link" href="#">Изучение иностранных языков</a></li>
+                <li><a class="service-link" href="#">Повышение квалификации</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Знания и библиотеки</h4>
+              <ul>
+                <li><a class="service-link" href="#">База знаний и Нейрон</a></li>
+                <li><a class="service-link" href="#">Электронная библиотека</a></li>
+                <li><a class="service-link" href="#">База знаний бизнес-системы</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Оценка и карьера</h4>
+              <ul>
+                <li><a class="service-link" href="#">Аттестация</a></li>
+                <li><a class="service-link" href="#">Диалог о целях</a></li>
+                <li><a class="service-link" href="#">Кадровый резерв</a></li>
+                <li><a class="service-link" href="#">Кадровый комитет</a></li>
+                <li><a class="service-link" href="#">Конкурс Н.А.С. и аспирантура</a></li>
+                <li><a class="service-link" href="#">Конкурс «Прорыв года»</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Профессиональные сообщества</h4>
+              <ul>
+                <li><a class="service-link" href="#">Лекторий</a></li>
+                <li><a class="service-link" href="#">Инженерный клуб</a></li>
+                <li><a class="service-link" href="#">Центры экспертиз</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false" aria-controls="panel-6">
+          <span>6. Производство, качество, охрана труда</span>
+          <svg class="chevron"><use href="#icon-chevron"/></svg>
+        </button>
+        <div class="accordion-panel" id="panel-6">
+          <div class="accordion-panel-inner">
+            <div class="subgroup">
+              <h4>Производственные системы</h4>
+              <ul>
+                <li><a class="service-link" href="#">АРМ</a></li>
+                <li><a class="service-link" href="#">Журнал производственного контроля</a></li>
+                <li><a class="service-link" href="#">САПР КТИ</a></li>
+                <li><a class="service-link" href="#">Система КТПП</a></li>
+                <li><a class="service-link" href="#">ИС Метрология</a></li>
+                <li><a class="service-link" href="#">СТО и МОЗ</a></li>
+                <li><a class="service-link" href="#">Продажа неликвидов</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Качество</h4>
+              <ul>
+                <li><a class="service-link" href="#">Вопросы качества на ПРП</a></li>
+                <li><a class="service-link" href="#">Дашборд качества</a></li>
+                <li><a class="service-link" href="#">Портал качества</a></li>
+                <li><a class="service-link" href="#">Документация по качеству</a></li>
+                <li><a class="service-link" href="#">Аудиты качества</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Охрана труда и промбезопасность</h4>
+              <ul>
+                <li><a class="service-link" href="#">Охрана труда (главная)</a></li>
+                <li><a class="service-link" href="#">СИЗ</a></li>
+                <li><a class="service-link" href="#">Работы на высоте</a></li>
+                <li><a class="service-link" href="#">Приложение СИЗ</a></li>
+                <li><a class="service-link" href="#">Молнии</a></li>
+                <li><a class="service-link" href="#">Видеоматериалы по ОТ</a></li>
+                <li><a class="service-link" href="#">Документы по ОТ</a></li>
+                <li><a class="service-link" href="#">Программа «Опора»</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Бизнес-система (ЦРБС)</h4>
+              <ul>
+                <li><a class="service-link" href="#">Инструменты БС</a></li>
+                <li><a class="service-link" href="#">Аудиты БС</a></li>
+                <li><a class="service-link" href="#">Ключевые проекты БС</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false" aria-controls="panel-7">
+          <span>7. Здоровье и благополучие</span>
+          <svg class="chevron"><use href="#icon-chevron"/></svg>
+        </button>
+        <div class="accordion-panel" id="panel-7">
+          <div class="accordion-panel-inner">
+            <div class="subgroup">
+              <h4>Медицина и ДМС</h4>
+              <ul>
+                <li><a class="service-link" href="#">ДМС для сотрудника</a></li>
+                <li><a class="service-link" href="#">ДМС для близких</a></li>
+                <li><a class="service-link" href="#">МСЧ</a></li>
+                <li><a class="service-link" href="#">Фонд медицинской поддержки</a></li>
+                <li><a class="service-link" href="#">Диспансеризация</a></li>
+                <li><a class="service-link" href="#">Санаторно-курортное лечение</a></li>
+                <li><a class="service-link" href="#">Донорство</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Питание</h4>
+              <ul>
+                <li><a class="service-link" href="#">Столовые и меню</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Отдых и спорт</h4>
+              <ul>
+                <li><a class="service-link" href="#">Отдых и путёвки</a></li>
+                <li><a class="service-link" href="#">Детский отдых</a></li>
+                <li><a class="service-link" href="#">Энергия спорта</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Льготы и поддержка</h4>
+              <ul>
+                <li><a class="service-link" href="#">Best Benefits</a></li>
+                <li><a class="service-link" href="#">Волонтёрство и благотворительность</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false" aria-controls="panel-8">
+          <span>8. Жизнь компании</span>
+          <svg class="chevron"><use href="#icon-chevron"/></svg>
+        </button>
+        <div class="accordion-panel" id="panel-8">
+          <div class="accordion-panel-inner">
+            <div class="subgroup">
+              <h4>Новости и медиа</h4>
+              <ul>
+                <li><a class="service-link" href="#">Новости компании</a></li>
+                <li><a class="service-link" href="#">Telegram/MAX/ВК/YouTube</a></li>
+                <li><a class="service-link" href="#">Энергопульс</a></li>
+                <li><a class="service-link" href="#">Дайджест ИТ</a></li>
+                <li><a class="service-link" href="#">КВН</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>События</h4>
+              <ul>
+                <li><a class="service-link" href="#">Мероприятия</a></li>
+                <li><a class="service-link" href="#">Выставки и конференции</a></li>
+                <li><a class="service-link" href="#">Дни рождения коллег</a></li>
+                <li><a class="service-link" href="#">Поздравить партнёра</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Признание</h4>
+              <ul>
+                <li><a class="service-link" href="#">Награды и признание</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>История и традиции</h4>
+              <ul>
+                <li><a class="service-link" href="#">Музеи ЛМЗ и Электросилы</a></li>
+                <li><a class="service-link" href="#">Производственные экскурсии</a></li>
+                <li><a class="service-link" href="#">Бессмертный полк</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false" aria-controls="panel-9">
+          <span>9. О компании и правила</span>
+          <svg class="chevron"><use href="#icon-chevron"/></svg>
+        </button>
+        <div class="accordion-panel" id="panel-9">
+          <div class="accordion-panel-inner">
+            <div class="subgroup">
+              <h4>О компании</h4>
+              <ul>
+                <li><a class="service-link" href="#">О компании</a></li>
+                <li><a class="service-link" href="#">Миссия/видение/ценности</a></li>
+                <li><a class="service-link" href="#">Руководители и помощники</a></li>
+                <li><a class="service-link" href="#">Реквизиты</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Справочник подразделений</h4>
+              <ul>
+                <li><a class="service-link" href="#">Структура компании</a></li>
+                <li><a class="service-link" href="#">Справочник 24 подразделений</a></li>
+                <li><a class="service-link" href="#">Вакансии</a></li>
+                <li><a class="service-link" href="#">Приведи друга</a></li>
+              </ul>
+            </div>
+            <div class="subgroup">
+              <h4>Политики и регламенты</h4>
+              <ul>
+                <li><a class="service-link" href="#">Стандарт поведения</a></li>
+                <li><a class="service-link" href="#">ИБ: правила</a></li>
+                <li><a class="service-link" href="#">Персональные данные</a></li>
+                <li><a class="service-link" href="#">Личная безопасность</a></li>
+                <li><a class="service-link" href="#">Новости законодательства</a></li>
+                <li><a class="service-link" href="#">Алкотестеры</a></li>
+                <li><a class="service-link" href="#">Нотариальные услуги</a></li>
+                <li><a class="service-link" href="#">Интеллектуальная собственность</a></li>
+                <li><a class="service-link" href="#">Регламенты закупок</a></li>
+                <li><a class="service-link" href="#">Уничтожение документов</a></li>
+                <li><a class="service-link" href="#">Канцелярия</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <strong>Силовые машины</strong> · Интранет-портал · Каталог сервисов
+  </div>
+</footer>
+
+<button class="fab" id="scrollTop" aria-label="Наверх">
+  <svg><use href="#icon-up"/></svg>
+</button>
+
+<div class="tooltip" id="tooltip" role="status">Ссылка появится позже</div>
+
+<script>
+(function () {
+  /* ---------- Accordion ---------- */
+  var headers = document.querySelectorAll('.accordion-header');
+  headers.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var panel = document.getElementById(btn.getAttribute('aria-controls'));
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      if (expanded) {
+        panel.style.maxHeight = '0px';
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  /* ---------- Tooltip on placeholder links ---------- */
+  var tooltip = document.getElementById('tooltip');
+  var tooltipTimer;
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[href="#"]');
+    if (!link) return;
+    e.preventDefault();
+    var rect = link.getBoundingClientRect();
+    var left = Math.min(Math.max(rect.left, 12), window.innerWidth - 220);
+    tooltip.style.left = left + 'px';
+    tooltip.style.top = (rect.bottom + 10) + 'px';
+    tooltip.classList.add('show');
+    clearTimeout(tooltipTimer);
+    tooltipTimer = setTimeout(function () {
+      tooltip.classList.remove('show');
+    }, 1600);
+  });
+
+  /* ---------- Search ---------- */
+  var input = document.getElementById('searchInput');
+  var noResults = document.getElementById('noResults');
+  var accordionItems = document.querySelectorAll('.accordion-item');
+
+  input.addEventListener('input', function () {
+    var q = input.value.trim().toLowerCase();
+
+    if (q === '') {
+      accordionItems.forEach(function (item) {
+        item.classList.remove('no-match');
+        item.querySelectorAll('.subgroup').forEach(function (sg) { sg.classList.remove('no-match'); });
+        item.querySelectorAll('.service-link').forEach(function (a) { a.parentElement.classList.remove('no-match'); });
+        if (item.dataset.forcedOpen === '1') {
+          var btn = item.querySelector('.accordion-header');
+          var panel = item.querySelector('.accordion-panel');
+          panel.style.maxHeight = '0px';
+          btn.setAttribute('aria-expanded', 'false');
+          item.dataset.forcedOpen = '0';
+        }
+      });
+      noResults.classList.remove('visible');
+      return;
+    }
+
+    var anyVisible = false;
+
+    accordionItems.forEach(function (item) {
+      var itemHasMatch = false;
+      item.querySelectorAll('.subgroup').forEach(function (sg) {
+        var sgHasMatch = false;
+        var headingMatch = sg.querySelector('h4').textContent.toLowerCase().indexOf(q) !== -1;
+        sg.querySelectorAll('.service-link').forEach(function (a) {
+          var match = headingMatch || a.textContent.toLowerCase().indexOf(q) !== -1;
+          a.parentElement.classList.toggle('no-match', !match);
+          if (match) sgHasMatch = true;
+        });
+        sg.classList.toggle('no-match', !sgHasMatch);
+        if (sgHasMatch) itemHasMatch = true;
+      });
+      item.classList.toggle('no-match', !itemHasMatch);
+
+      if (itemHasMatch) {
+        anyVisible = true;
+        var btn = item.querySelector('.accordion-header');
+        var panel = item.querySelector('.accordion-panel');
+        btn.setAttribute('aria-expanded', 'true');
+        item.dataset.forcedOpen = '1';
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+      }
+    });
+
+    noResults.classList.toggle('visible', !anyVisible);
+  });
+
+  /* ---------- Floating action button ---------- */
+  var fab = document.getElementById('scrollTop');
+  window.addEventListener('scroll', function () {
+    fab.classList.toggle('visible', window.scrollY > 400);
+  });
+  fab.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+
+</body>
+</html>
